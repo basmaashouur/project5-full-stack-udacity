@@ -17,8 +17,8 @@ This project is single-page application featuring a map of my favourtite places 
 - Internet Connection 
 
 ## Setup
-1. Clone this repo
-2. Run `index.html` in your browser
+- Clone this repo
+- Run `index.html` in your browser
 
 ## Online Version
 - You can find a live running site of this code [here]( https://basmaashouur.github.io/project5-udacity/).
