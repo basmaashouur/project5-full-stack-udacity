@@ -21,10 +21,10 @@ This project is single-page application featuring a map of my favourtite places 
 - Run `index.html` in your browser
 
 ## Online Version
-- You can find a live running site of this code [here]( https://basmaashouur.github.io/project5-udacity/).
+- You can find a live running site of this code [here]( https://basmaashouur.github.io/project5-udacity/)
 
 ## References
-- [W3schools](https://www.w3schools.com/howto/howto_js_sidenav.asp).
-- [Knockoutjs Documentation](http://knockoutjs.com/documentation/introduction.html).
-- The Repos's of other FSND students on Github.
-- **Special Thanks to *[EsraaQandel](https://github.com/EsraaQandel)* for her great help**.
+- [W3schools](https://www.w3schools.com/howto/howto_js_sidenav.asp)
+- [Knockoutjs Documentation](http://knockoutjs.com/documentation/introduction.html)
+- The Repos's of other FSND students on Github
+- **Special Thanks to *[EsraaQandel](https://github.com/EsraaQandel)* for her great help**
