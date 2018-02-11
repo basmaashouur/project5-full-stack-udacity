@@ -5,7 +5,14 @@ By Basma Ashour, in fulfillment of Udacity's [Full-Stack Web Developer Nanodegre
 ## About
 This project is single-page application featuring a map of my favourtite places in my hometown Aswan, including: map markers to identify these places, a search function to easily discover and filter these locations, and a listview to support simple browsing of all locations. Implemented a third-party Wikipedia article API that provide additional information about each of these locations.
 
-### Pre-Requirements
+## Used APIS
+- Google Maps APIS
+- Wikipedia article API
+
+## Used Javascript libraries 
+- knockout-3.4.2.js
+
+## Pre-Requirements
 - Browser
 - Internet Connection 
 
@@ -18,6 +25,6 @@ This project is single-page application featuring a map of my favourtite places 
 
 ## References
 - [W3schools](https://www.w3schools.com/howto/howto_js_sidenav.asp).
-- [Knockoutjs Documentation](http://knockoutjs.com/documentation/introduction.html)
+- [Knockoutjs Documentation](http://knockoutjs.com/documentation/introduction.html).
 - The Repos's of other FSND students on Github.
 - **Special Thanks to *[EsraaQandel](https://github.com/EsraaQandel)* for her great help**.
