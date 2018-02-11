@@ -5,11 +5,11 @@ By Basma Ashour, in fulfillment of Udacity's [Full-Stack Web Developer Nanodegre
 ## About
 This project is single-page application featuring a map of my favourtite places in my hometown Aswan, including: map markers to identify these places, a search function to easily discover and filter these locations, and a listview to support simple browsing of all locations. Implemented a third-party Wikipedia article API that provide additional information about each of these locations.
 
-## Used APIS
+## APIS
 - Google Maps APIS
 - Wikipedia article API
 
-## Used Javascript libraries 
+## Javascript libraries 
 - knockout-3.4.2.js
 
 ## Pre-Requirements
