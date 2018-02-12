@@ -1,31 +1,11 @@
 //The Model 
 var locations = [
-    {title: 'Philae Temple', location: { lat: 24.01266, lng: 32.87754 },id:1},
-    {title: 'Aswan Museum',location: { lat:  24.085228, lng: 32.887001 },id:2},
-    {title: 'Seheil Island', location: { lat: 24.061354, lng: 32.871902 },id:3}, 
-    {title: 'Nubian Museum', location: { lat: 24.079425, lng: 32.889175 },id:4},
-    {title: 'Elephantine Island', location: { lat: 24.085652, lng: 32.885574 },id:5}
+    {title: 'Philae Temple', location: { lat: 24.01266, lng: 32.87754 },id:0},
+    {title: 'Aswan Museum',location: { lat:  24.085228, lng: 32.887001 },id:1},
+    {title: 'Seheil Island', location: { lat: 24.061354, lng: 32.871902 },id:2}, 
+    {title: 'Nubian Museum', location: { lat: 24.079425, lng: 32.889175 },id:3},
+    {title: 'Elephantine Island', location: { lat: 24.085652, lng: 32.885574 },id:4}
 ];
-
-
-// Function renders the app
-
-function initMap() {
-    function loadMap(loadLocations) {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {
-                lat: 24.113193,
-                lng: 32.920774
-            },
-            zoom: 13
-        });
-        loadLocations();
-    }
-    // load the locations 
-    loadMap(function() {
-        ko.applyBindings(new ViewModel());
-    });
-}
 
 
 // The view model that connect model to the view
@@ -34,9 +14,8 @@ var ViewModel = function() {
     var markers = [];
     var largeInfowindow = new google.maps.InfoWindow();
     var bounds = new google.maps.LatLngBounds();
-    self.query = ko.observable('');
 
-    // functiom calls populate window
+    // function calls populateinfowindow
     wikiinfo = function() {
         populateInfoWindow(this, largeInfowindow);
     };
@@ -45,6 +24,7 @@ var ViewModel = function() {
     // which calls wiki info window function
     // Toke this code from 
     // *https://github.com/EsraaQandel/Neighborhood-Map/blob/master/js/app.js#L49*
+    self.query = ko.observable('');
     self.showMarker = function(clickeditem) {
         for (var i = 0; i < markers.length; i++) {
             if (markers[i].id == clickeditem.id) {
@@ -79,7 +59,6 @@ var ViewModel = function() {
         });
         markers.push(marker);
         marker.addListener('click', wikiinfo);
-
         bounds.extend(markers[i].position);
     } // end of markers
 
@@ -115,16 +94,35 @@ var ViewModel = function() {
 
     // To filter the map depndes on the search
     self.filterMap = function() {
-        for (var x = 0; x < markers.length; x++)
+        for (var x = 0; x < markers.length; x++) {
+            markers[x].setMap(null);
             for (var y = 0; y < self.finList().length; y++)
-                if (markers[x].id != self.finList()[y].id)
-                    markers[x].setMap(null);
+                if (markers[x].id == self.finList()[y].id)
+                    markers[x].setMap(map);
+        }
     };
 
 
 }; // End of viewmodel
 
 
+// Function renders the app
+function initMap() {
+    function loadMap(loadLocations) {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {
+                lat: 24.113193,
+                lng: 32.920774
+            },
+            zoom: 13
+        });
+        loadLocations();
+    }
+    // load the locations 
+    loadMap(function() {
+        ko.applyBindings(new ViewModel());
+    });
+}
 
 //Handle the map error
 function mapError() {
