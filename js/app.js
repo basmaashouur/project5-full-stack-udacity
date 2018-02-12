@@ -7,7 +7,6 @@ var locations = [
     {title: 'Elephantine Island', location: { lat: 24.085652, lng: 32.885574 },id:4}
 ];
 
-
 // The view model that connect model to the view
 var ViewModel = function() {
     var self = this;
@@ -86,6 +85,16 @@ var ViewModel = function() {
                 }
             });
             infowindow.open(map, marker);
+
+            if (marker.getAnimation() !== null) marker.setAnimation(null);
+
+            else {
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+                setTimeout(function() {
+                    marker.setAnimation(null);
+                }, 2000);
+            }
+
             infowindow.addListener('closeclick', function() {
                 infowindow.setMarker = null;
             });
