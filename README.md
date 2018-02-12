@@ -17,7 +17,7 @@ This project is single-page application featuring a map of my favourtite places 
 - Internet Connection 
 
 ## Setup
-- Clone this repo
+- Clone or download this repo
 - Run `index.html` in your browser
 
 ## Online Version
