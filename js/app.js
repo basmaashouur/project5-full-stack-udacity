@@ -1,14 +1,15 @@
-     //The Model AKA Data 
-    var locations = [
-    {title: 'Philae Temple', location: { lat: 24.01266, lng: 32.87754 }},
-    {title: 'Aswan Museum',location: { lat:  24.085228, lng: 32.887001 }},
-    {title: 'Seheil Island', location: { lat: 24.061354, lng: 32.871902 }},
-    {title: 'Nubian Museum', location: { lat: 24.079425, lng: 32.889175 }},
-    {title: 'Elephantine Island', location: { lat: 24.085652, lng: 32.885574 }}
+//The Model 
+var locations = [
+    {title: 'Philae Temple', location: { lat: 24.01266, lng: 32.87754 },id:1},
+    {title: 'Aswan Museum',location: { lat:  24.085228, lng: 32.887001 },id:2},
+    {title: 'Seheil Island', location: { lat: 24.061354, lng: 32.871902 },id:3}, 
+    {title: 'Nubian Museum', location: { lat: 24.079425, lng: 32.889175 },id:4},
+    {title: 'Elephantine Island', location: { lat: 24.085652, lng: 32.885574 },id:5}
 ];
 
 
-// the render template function 
+// Function renders the app
+
 function initMap() {
     function loadMap(loadLocations) {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -16,29 +17,34 @@ function initMap() {
                 lat: 24.113193,
                 lng: 32.920774
             },
-            zoom: 20
+            zoom: 13
         });
         loadLocations();
     }
+    // load the locations 
     loadMap(function() {
         ko.applyBindings(new ViewModel());
     });
 }
 
 
-
+// The view model that connect model to the view
 var ViewModel = function() {
     var self = this;
     var markers = [];
     var largeInfowindow = new google.maps.InfoWindow();
     var bounds = new google.maps.LatLngBounds();
-
     self.query = ko.observable('');
 
-    // when clicked in the li data in the view it calls this function
+    // functiom calls populate window
+    wikiinfo = function() {
+        populateInfoWindow(this, largeInfowindow);
+    };
+
+    // When clicked in the li data in the view it calls this function
     // which calls wiki info window function
-    // Toke this code from this repo 
-    //*https://github.com/EsraaQandel/Neighborhood-Map/blob/master/js/app.js#L49 *
+    // Toke this code from 
+    // *https://github.com/EsraaQandel/Neighborhood-Map/blob/master/js/app.js#L49*
     self.showMarker = function(clickeditem) {
         for (var i = 0; i < markers.length; i++) {
             if (markers[i].id == clickeditem.id) {
@@ -47,9 +53,9 @@ var ViewModel = function() {
         }
     };
 
-    // filter the data depends on the filter search and put it in finlist
-    // Toke this code from this repo 
-    //*https://github.com/EsraaQandel/Neighborhood-Map/blob/master/js/app.js#L49 *
+    // Filter the data depends on the filter search and put it in finlist
+    // Toke this code from  
+    // *https://github.com/EsraaQandel/Neighborhood-Map/blob/master/js/app.js#L49*
     self.finList = ko.computed(function() {
         var search = self.query().toLowerCase();
         return ko.utils.arrayFilter(locations, function(item) {
@@ -58,11 +64,12 @@ var ViewModel = function() {
     });
 
 
-    // put the marker in the postions that are inside the fin list
+    // Put the marker in the postions that are inside the fin list
     // then call wiki info window
     for (var i = 0; i < self.finList().length; i++) {
         var position = self.finList()[i].location;
         var title = self.finList()[i].title;
+        var id = self.finList()[i].id;
         var marker = new google.maps.Marker({
             map: map,
             position: position,
@@ -71,16 +78,16 @@ var ViewModel = function() {
             id: i
         });
         markers.push(marker);
-        marker.addListener('click', function() {
-            populateInfoWindow(this, largeInfowindow);
-        });
+        marker.addListener('click', wikiinfo);
+
         bounds.extend(markers[i].position);
     } // end of markers
-    
+
+
     map.fitBounds(bounds);
 
-    // when click in the marker show a window which can redirct to wiki 
-    // to know more informations about the postion 
+    // When click in the marker show a window which can redirct to wiki 
+    // page to know more informations about the location
     function populateInfoWindow(marker, infowindow) {
         if (infowindow.marker != marker) {
             infowindow.marker = marker;
@@ -104,21 +111,28 @@ var ViewModel = function() {
                 infowindow.setMarker = null;
             });
         }
-    } // end of wiki info window
+    } // End of wiki info window
+
+    // To filter the map depndes on the search
+    self.filterMap = function() {
+        for (var x = 0; x < markers.length; x++)
+            for (var y = 0; y < self.finList().length; y++)
+                if (markers[x].id != self.finList()[y].id)
+                    markers[x].setMap(null);
+    };
 
 
-} // end of viewmodel
+}; // End of viewmodel
 
 
 
-
+//Handle the map error
 function mapError() {
     document.getElementById('map').innerHTML = "Error loading the map";
 }
 
 
-
-/* Functions for handle the animated nav*/
+/* Functions for handling the animated nav*/
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";

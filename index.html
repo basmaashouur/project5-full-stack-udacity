@@ -4,7 +4,6 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Neighborhood Map</title>
-      <link rel="stylesheet" href="css/bootstrap.min.css">
       <link rel="stylesheet" href="css/style.css">
       <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One%7CRaleway:300,400" rel="stylesheet">
       <link href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" rel="stylesheet">
@@ -12,6 +11,7 @@
    <body>
       <div id="mySidenav" class="sidenav">
          <input placeholder="Filter" type="search" name="q" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off">
+        <button id="button" data-bind="click: filterMap">Filter</button>
          <ul style="margin-top: 10px" data-bind="template: {name:'item', foreach:finList}"></ul>
          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       </div>
@@ -23,7 +23,9 @@
          <li class="item" data-bind="text: title,click: $parent.showMarker"></li>
       </script>
       <script src="js/knockout-3.4.2.js"></script>
-      <script src="js/app.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script src="js/app.js"></script>            
+
       <script async defer
          src="https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing&key=AIzaSyA5Z9F7rXyb7wK1ITkzCixvsxcJYfcGQys&callback=initMap" onerror="mapError()"></script>
    </body>
